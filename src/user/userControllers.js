@@ -25,5 +25,12 @@ exports.getStoredHash = async (username) => {
 };
 
 exports.giveToken = async (req, res) => {
-  console.log("giveToken");
+  try {
+    res.status(200).send({
+      token: "This user is legit",
+      username: req.body.username,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };

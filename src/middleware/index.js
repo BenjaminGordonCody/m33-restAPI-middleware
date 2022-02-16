@@ -21,9 +21,12 @@ exports.checkPasswordAgainstDB = async (req, res, next) => {
       )
     ) {
       console.log("true");
+      next();
+    } else {
+      throw Error("Submitted password doesn't match stored hash");
     }
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
     res.status(500).send({ err: error.message });
   }
 };
