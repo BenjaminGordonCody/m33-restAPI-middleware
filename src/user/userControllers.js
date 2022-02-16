@@ -9,3 +9,21 @@ exports.addUser = async (req, res) => {
     res.status(500).send({ err: error.message });
   }
 };
+
+exports.getPasswordHash = async (username) => {
+  try {
+    console.log("getPasswordHash");
+    const user = await User.findOne({ username: username });
+    if (user.password) {
+      return user.password;
+    } else {
+      return undefined;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+exports.giveToken = async (req, res) => {
+  console.log("giveToken");
+};
