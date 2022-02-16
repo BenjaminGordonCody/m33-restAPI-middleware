@@ -14,6 +14,7 @@ exports.getPasswordHash = async (username) => {
   try {
     console.log("getPasswordHash");
     const user = await User.findOne({ username: username });
+    console.log(user);
     if (user.password) {
       return user.password;
     } else {

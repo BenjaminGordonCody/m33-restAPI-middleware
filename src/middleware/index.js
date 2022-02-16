@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const { getPasswordHash } = require("../user/userControllers");
 
 exports.hashPass = async (req, res, next) => {
-  console.log(req.body);
+  console.log("hashpass", req.body);
   try {
     req.body.password = await bcrypt.hash(req.body.password, 8);
     next();
@@ -15,11 +15,17 @@ exports.hashPass = async (req, res, next) => {
 exports.checkPass = async (req, res, next) => {
   try {
     console.log("checkPass");
-    if (
-      (await bcrypt.hash(req.body.password, 8)) ==
-      (await getPasswordHash(req.body.username))
-    ) {
+    const submittedHash = await bcrypt.hash(req.body.password, 8);
+    const storedHash = await getPasswordHash(req.body.username);
+    console.log(
+      "submitted hash: " + submittedHash,
+      "stored hash: " + storedHash
+    );
+
+    if (submittedHash == storedHash) {
       console.log("match");
+    } else {
+      console.log("mismatch");
     }
   } catch (error) {
     console.log(error);
