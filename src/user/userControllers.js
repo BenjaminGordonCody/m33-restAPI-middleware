@@ -10,11 +10,10 @@ exports.addUser = async (req, res) => {
   }
 };
 
-exports.getPasswordHash = async (username) => {
+exports.getStoredHash = async (username) => {
   try {
     console.log("getPasswordHash");
     const user = await User.findOne({ username: username });
-    console.log(user);
     if (user.password) {
       return user.password;
     } else {
