@@ -10,6 +10,10 @@ exports.addUser = async (req, res) => {
   }
 };
 
+exports.deleteUser = async (user) => {
+  console.log(user);
+};
+
 exports.getStoredHash = async (username) => {
   try {
     console.log("getPasswordHash");
