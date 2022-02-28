@@ -10,6 +10,16 @@ exports.addUser = async (req, res) => {
   }
 };
 
+exports.deleteUser = async (req, res) => {
+  try {
+    const deleteUserReply = await User.deleteOne(req.body);
+    res.status(200).send({ deleteCount: deleteUserReply.deletedCount });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ err: error.message });
+  }
+};
+
 exports.getStoredHash = async (username) => {
   try {
     console.log("getPasswordHash");

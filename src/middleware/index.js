@@ -20,7 +20,7 @@ exports.checkPasswordAgainstDB = async (req, res, next) => {
         await getStoredHash(req.body.username)
       )
     ) {
-      console.log("true");
+      console.log("password matches hash");
       next();
     } else {
       throw Error("Submitted password doesn't match stored hash");
